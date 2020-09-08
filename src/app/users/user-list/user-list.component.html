@@ -1,0 +1,32 @@
+<div class="container">
+  <app-message [note]="message"></app-message>
+  <app-input-search (keyword)="search($event)"></app-input-search>
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">Role</th>
+      <th scope="col" colspan="2">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users; let i = index" >
+      <th scope="row">{{i+1}}</th>
+      <td>{{user.name}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.address}}</td>
+      <ng-container *ngFor="let role of roles">
+        <td *ngIf="role.id == user.role_id">{{role.name}}</td>
+      </ng-container>
+      <td><a href="" class="btn btn-primary" [routerLink]="[user.id,'edit']">Edit</a></td>
+      <td><button class="btn btn-danger" (click)="remove(user.id)">Delete</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="" class="btn btn-success" [routerLink]="['add']">ADD NEW USER</a>
+</div>
